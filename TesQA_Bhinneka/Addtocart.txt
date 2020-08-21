@@ -1,0 +1,78 @@
+*** Settings ***
+Library           SeleniumLibrary
+
+*** Variables ***
+${url}            https://www.bhinneka.com/
+${delay}          10s
+${delay2}         5s
+
+*** Test Cases ***
+AddtoCart_Search
+    login
+    Sleep    ${delay}
+    Input Text    xpath=(//input[@type='search'])[2]    Macbook
+    Sleep    ${delay}
+    Press Keys    xpath=(//input[@type='search'])[2]    ENTER
+    Sleep    ${delay2}
+    Click Element    xpath=//*[@id='catalogueProduct']/div[8]
+    Sleep    ${delay}
+    Click Link    id=atc
+    Sleep    ${delay}
+    Click Button    id= onesignal-slidedown-cancel-button
+    Sleep    ${delay}
+    Click Button    xpath=(//button[@type='button'])[6]
+    Sleep    ${delay2}
+    Click Element    xpath=(//input[@type='search'])[2]
+    Input Text    xpath=(//input[@type='search'])[2]    Mouse
+    Sleep    15s
+    Click Element    xpath=//ul[@class='bt-search-suggestion__list']/li[2]
+    Sleep    ${delay}
+    Click Link    id=atc
+    Sleep    20s
+    Click Button    id=goToCart
+    Sleep    ${delay}
+
+addtoCart_Kategori
+    Sleep    5s
+    Click Element    xpath=(//img[@alt='Bhinneka Logo'])[2]
+    Sleep    ${delay2}
+    Click Element    link=Lainnya
+    Sleep    ${delay2}
+    Click Element    xpath=//*[@class='bt-s-menu-grid-modal__list']/div[6]
+    Sleep    ${delay2}
+    Click Element    xpath=//*[@id='catalogueProduct']/div[3]
+    Sleep    ${delay}
+    Click Link    id=atc
+    Sleep    ${delay}
+    Click Button    id=goToCart
+    Sleep    ${delay}
+
+addtoCart_Flash_sale
+    Sleep    10s
+    Click Element    xpath=(//img[@alt='Bhinneka Logo'])[2]
+    Sleep    20s
+    #Wait until Page Contains Element    xpath=//*[@class='bt-s-flash-sale']    20
+    #Sleep    20s
+    Click Element    link=Lihat Semua
+    Sleep    20s
+    Wait until Page Contains Element    xpath=//*[@id='product-list']    20
+    Click Element    xpath=//*[@id='product-list']/div[8]
+    Sleep    15s
+    Click Link    id=atc
+    Sleep    ${delay}
+    Click Button    id=goToCart
+    Close Browser
+    #Click Element    xpath=//*[@class='bt-s-flash-sale__header']/button[@class='btn.btn-secondary]
+
+*** Keywords ***
+login
+    Open Browser    ${url}    chrome
+    Maximize Browser Window
+    Sleep    ${delay}
+    Click Link    class = btn
+    Input Text    id=email    shellaciptadewi17@gmail.com
+    Click Button    id=next
+    Sleep    ${delay}
+    Input Password    id=password    abuabuungu17
+    Click Button    class=ant-btn-primary
+    Sleep    ${delay}
